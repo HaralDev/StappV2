@@ -28,7 +28,7 @@
  *      GND -> GND
  *      
  *      Libs:
- *      dataLogger example SDFat TinyGPS+
+ *      SDFat TinyGPS+
  */
 
 
