@@ -34,6 +34,8 @@ The package consists of four Arduino files: one for each subsystem (GPS, SD, ADX
 
 The main file first sets each subsystem up, along with a Serial connection and some other things we need. Then it goes into normal operation where it constantly tries to get a fix from the GPS module, which is not always easy with bad visibility. It also measures the accelerations continuously. All of this is logged into a csv file on the SD card provided. 
 
+<img src="https://github.com/HaralDev/StappV2/blob/master/StappBikeTrip.png " width="400"> 
+
 # Encountered problems
 ## BME280 unit was broken
 Initially, I also wanted to include a pressure, temperature and humidity sensor, the BME280 into this system, and while this did work in the beginning, through some soldering and other activity it stopped functioning. Due to time constraints, a new one was not bought and integrated. The code however did work and I did [include](https://github.com/HaralDev/StappV2/blob/master/BME280_code.ino) it in the repository. This code was not implemented, but was tested and verified that it worked both individually and within the whole system. 
