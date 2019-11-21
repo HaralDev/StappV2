@@ -43,6 +43,7 @@ One SD card reader that was ordered did not work, and it took some time to fully
 
 ## GPS module takes time to fix
 The GPS module often takes a long time to get a fix, especially near high rises. This was seen as a certain downside of the system. One way that this problem was partially fixed is to have it in a kind of high power mode, where you constantly ask for the location (which was cleverly implemented in the smartDelay function in the TinyGPS++ library). 
+
 A trip outside (see map below, made with [GPSVisualiser](https://www.gpsvisualizer.com/)) was made with Stapp which shows a big gap in the GPS data. Stapp was inside a bag, and not oriented to the sky, so this is of course sub optimal. The map does however show inconsistency in the GPS signal.
 
 <p align="center"> <img src="https://github.com/HaralDev/StappV2/blob/master/StappBikeTrip.png " width="700">  </p>
