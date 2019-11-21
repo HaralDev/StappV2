@@ -34,8 +34,6 @@ The package consists of four Arduino files: one for each subsystem (GPS, SD, ADX
 
 The main file first sets each subsystem up, along with a Serial connection and some other things we need. Then it goes into normal operation where it constantly tries to get a fix from the GPS module, which is not always easy with bad visibility. It also measures the accelerations continuously. All of this is logged into a csv file on the SD card provided. 
 
-<img src="https://github.com/HaralDev/StappV2/blob/master/StappBikeTrip.png " width="400"> 
-
 # Encountered problems
 ## BME280 unit was broken
 Initially, I also wanted to include a pressure, temperature and humidity sensor, the BME280 into this system, and while this did work in the beginning, through some soldering and other activity it stopped functioning. Due to time constraints, a new one was not bought and integrated. The code however did work and I did [include](https://github.com/HaralDev/StappV2/blob/master/BME280_code.ino) it in the repository. This code was not implemented, but was tested and verified that it worked both individually and within the whole system. 
@@ -45,6 +43,9 @@ One SD card reader that was ordered did not work, and it took some time to fully
 
 ## GPS module takes time to fix
 The GPS module often takes a long time to get a fix, especially near high rises. This was seen as a certain downside of the system. One way that this problem was partially fixed is to have it in a kind of high power mode, where you constantly ask for the location (which was cleverly implemented in the smartDelay function in the TinyGPS++ library). 
+A trip outside (see map below, made with [GPSVisualiser](https://www.gpsvisualizer.com/)) was made with Stapp which shows a big gap in the GPS data. Stapp was inside a bag, and not oriented to the sky, so this is of course sub optimal. The map does however show inconsistency in the GPS signal.
+
+<p align="center"> <img src="https://github.com/HaralDev/StappV2/blob/master/StappBikeTrip.png " width="700">  </p>
 
 ## Improper interfacing
 The first iteration of Stapp included a very unhandy solution of integration, which was to solder all the components directly to a prototype PCB board. This made sure the components were extremely hard to remove when functional problems arose. A lesson learnt here was that it is very important to work with the proper connectors and interfacing, especially because interfacing between subsystems is always problematic. 
