@@ -1,5 +1,5 @@
 # Project background
-Stapp, which is, as an hommage, named after the legendary [John Stapp](https://en.wikipedia.org/wiki/John_Stapp "John Stapp wiki") who lived through an incredible 38g during biophysical testing. Originally, the system was designed to test g forces in a glider airplane; it could be mounted inside and taken on flights to measure the accelerations and the location. Stapp was developed within the course Space Mechatronics, given at the Delft University of Technology.
+Stapp, which is, as an homage, named after the legendary [John Stapp](https://en.wikipedia.org/wiki/John_Stapp "John Stapp wiki") who lived through an incredible 38g during biophysical testing. Originally, the system was designed to test g forces in a glider airplane; it could be mounted inside and taken on flights to measure the accelerations and the location. Stapp was developed within the course Space Mechatronics, given at the Delft University of Technology.
 
 # Basic workings
 An accelerometer measures the accelerations on 3 degrees of freedom, a GPS receiver is used for localisation, and a SD card adapter is used to log all this data properly. Assembled, the system looks like this:
