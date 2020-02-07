@@ -18,6 +18,7 @@ void writeHeader() {
   // GPS data
 
   // Datetime
+  file.print(F("millis,"));
   file.print(F("date,"));
   file.print(F("time,"));
   file.print(F("valid,"));
