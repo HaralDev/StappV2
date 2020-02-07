@@ -153,6 +153,17 @@ void acc_log(SdFile &file) {
 
   // Depending on the choice of user, writes the data to the data file and possibly 
   DEBUG_PRINT(F("\nAcc. data (X, Y, Z, Ra)\n"));
+  file.print(x_cor);
+  file.print(',');
+  file.print(y_cor);
+  file.print(',');
+  file.print(z_cor);
+  file.print(',');
+  file.print(R_cor);
+  file.print(',');
+  file.print(Ra);
+  file.print(',');
+  
   PRINT_VALUE(x_cor);
   PRINT_VALUE(y_cor);
   PRINT_VALUE(z_cor);
