@@ -28,7 +28,7 @@
  *      GND -> GND
  *      
  *      Libs:
- *      SDFat TinyGPS+
+ *      dataLogger example SDFat TinyGPS+
  */
 
 
@@ -45,7 +45,7 @@
 
 
 // Sampling frequency
-const uint8_t SAMPLE_INTERVAL_MS = 200; // to 0.2 seconds for Fs = 5 Hz
+const uint8_t SAMPLE_INTERVAL_MS = 20; // to 0.2 seconds for Fs = 5 Hz
 
 
 // Definitions for SD card
@@ -79,23 +79,26 @@ void setup() {
   Serial.begin(9600);
   Wire.begin();  
   // Wait for USB Serial 
+  
   while (!Serial) {
     SysCall::yield();
     if (millis > 5000) {
       // Do nothing, run code
+      break;
     }
   }
 
+  // Welcome user
+  Serial.print(F("---WELCOME TO STAPP---\n"));  
+
   // Setup the SD card
   sd_init(CLK_SPEED, chipSelect);
-  
-
-  // Welcome user
-  Serial.print(F("---WELCOME TO STAPP---\n"));
-
 
   gps_init();
   acc_init();
+
+
+  pinMode(LED_BUILTIN, OUTPUT);
      
   smartDelay(100);
 
@@ -116,7 +119,7 @@ void loop() {
    
    // Empty the line variable, which will be filled with all the values 
    line = "";
-  
+
    // Print gps and acceleration in the file
    gps_log(file);
    acc_log(file);
@@ -132,7 +135,7 @@ void loop() {
       Serial.print(F("SD:write err"));
       setup();
   }
-  
+
   smartDelay(SAMPLE_INTERVAL_MS);
 }
 
@@ -144,19 +147,24 @@ void prompt_question() {
    
    Serial.println(F("Do you want to see verbose logging or only the data? (yes=1, no=0)"));
    // Wait for answer, otherwise just start programme
-   while (Serial.available() == 0 & millis < 5000) {}
+   while (Serial.available() == 0) { 
+    unsigned long time_curr = millis();
+    if (time_curr  > 3000) 
+    return;
+    }
+
    int choice = Serial.parseInt();
   
    if (choice == 1) {
      Serial.println("Setting up verbose logging");
      #define DEBUG_PRINT(x)  Serial.println (x) 
-     #define PRINT_VALUE(x)  {Serial.print (x); Serial.print(","); file.print(x); file.print(","); line += String(x) + ",";}
+     #define PRINT_VALUE(x)  {Serial.print (x); Serial.print(","); line += String(x) + ",";}
      DEBUG_PRINT("Logging debug");
    }  
    else if (choice == 0){
      Serial.println("Disabling logging");
      #define DEBUG_PRINT(x)
-     #define PRINT_VALUE(x)  {file.print(x); file.print(","); line += String(x) + ",";}
+     #define PRINT_VALUE(x)  {line += String(x) + ",";}
    }
    else {
      Serial.println("Invalid choice, try again");
