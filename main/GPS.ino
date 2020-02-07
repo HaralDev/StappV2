@@ -48,15 +48,21 @@ void datetime_log(TinyGPSDate d, TinyGPSTime t)
   // Log date
   char chd[32];
   sprintf(chd, "%02d/%02d/%02d", d.month(), d.day(), d.year());
+  file.print(chd);
+  file.print(',');
   PRINT_VALUE(chd);
 
   
   // Log time
   char cht[32];
   sprintf(cht, "%02d:%02d:%02d", t.hour() , t.minute(), t.second());
+  file.print(cht);
+  file.print(',');
   PRINT_VALUE(cht);
   
   // Log validity of fix
+  file.print(d.isValid());
+  file.print(',');
   PRINT_VALUE(d.isValid());
 
 }
@@ -94,6 +100,9 @@ void gps_log(SdFile &file) {
   DEBUG_PRINT("GPS SAT VALUE:");
   DEBUG_PRINT(gps.satellites.value());
   // Log date, time, age of fix and fix validity
+  unsigned long miltime = millis();
+  file.print(miltime);
+  file.print(',');
   datetime_log(gps.date, gps.time);
 
   // Log nr of satellites and HDOP 
@@ -115,12 +124,15 @@ void gps_log(SdFile &file) {
 // Smart delay, keeps the gps active 
 static void smartDelay(unsigned long ms)
 {
+  digitalWrite(LED_BUILTIN, HIGH);
   unsigned long start = millis();
   do 
   {
     while (ss.available())
       gps.encode(ss.read());
   } while (millis() - start < ms);
+
+  digitalWrite(LED_BUILTIN, LOW);
 }
 
 
